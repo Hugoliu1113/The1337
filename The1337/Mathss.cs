@@ -11,81 +11,123 @@ namespace The1337
     {
         public void Start()
         {
-            int[] iQuert = { 1, 2, 3, 4 };
-            string[] sQuert = { "1", "2", "3", "4" };
-            foreach (var vTuple in MegreArray(sQuert, iQuert))
+            foreach (float[] f in GetAllArray(new float[] { 1, 3, 3, 7 }))
             {
-                Console.WriteLine(vTuple.Item1);
-                Console.WriteLine(vTuple.Item2);
+                ScratchPaper scratchPaper = new ScratchPaper(f);
+
+                foreach (var vTuple in MegreArray(scratchPaper))
+                {
+                    if (vTuple.VariableArray[0] == 10)
+                    {
+                        Console.WriteLine(vTuple.BlankPlenses[0]);
+                        Console.WriteLine(vTuple.VariableArray[0]);
+                    }
+                }
             }
 
         }
 
         //將陣列兩組兩組方式合併疊加
-        public IEnumerable<(string, int)> MegreArray(string[] sArray, int[] iArray)
+        public IEnumerable<ScratchPaper> MegreArray(ScratchPaper iscratchPager)
         {
-            if (iArray.Length == 1)
+            if (iscratchPager.ParerLength == 1)
             {
-                yield return (sArray[0], iArray[0]);
+                yield return iscratchPager;
                 yield break;
             }
-            for (int j = 0; j < iArray.Length - 1; j++)
+            foreach (char mark in new char[] { '+', '-', '*', '/' })
             {
-                int[] ints = new int[iArray.Length - 1];
-                string[] inLog = new string[iArray.Length - 1];
-                int index = 0;
-                for (int i = 0; i < iArray.Length - 1; i++)
+                for (int j = 0; j < iscratchPager.ParerLength - 1; j++)
                 {
-                    if (i == j)
+                    ScratchPaper blankPaper = new ScratchPaper();
+                    blankPaper.VariableArray = new float[iscratchPager.ParerLength - 1];
+                    blankPaper.BlankPlenses = new string[iscratchPager.ParerLength - 1];
+
+                    int index = 0;
+                    for (int i = 0; i < iscratchPager.ParerLength - 1; i++)
                     {
-                        ints[i] = iArray[i] + iArray[i + 1];
-                        inLog[i] = "(" + sArray[i] + "+" + sArray[i + 1] + ")";
-                        index = 1;
+                        if (i == j)
+                        {
+                            float x1 = iscratchPager.VariableArray[i];
+                            float x2 = iscratchPager.VariableArray[i + 1];
+                            string s1 = iscratchPager.BlankPlenses[i];
+                            string s2 = iscratchPager.BlankPlenses[i + 1];
+
+                            switch (mark)
+                            {
+                                case '+':
+                                    blankPaper.VariableArray[i] = x1 + x2;
+                                    blankPaper.BlankPlenses[i] = s1 + "+" + s2;
+                                    break;
+
+                                case '-':
+                                    blankPaper.VariableArray[i] = x1 - x2;
+                                    blankPaper.BlankPlenses[i] = s1 + "-" + s2;
+                                    break;
+
+                                case '*':
+                                    if (!int.TryParse(s1, out _))
+                                        s1 = "(" + s1 + ")";
+                                    if (!int.TryParse(s2, out _))
+                                        s2 = "(" + s2 + ")";
+                                    blankPaper.VariableArray[i] = x1 * x2;
+                                    blankPaper.BlankPlenses[i] = s1 + "*" + s2;
+                                    break;
+
+                                case '/':
+                                    if (!int.TryParse(s1, out _))
+                                        s1 = "(" + s1 + ")";
+                                    if (!int.TryParse(s2, out _))
+                                        s2 = "(" + s2 + ")";
+                                    blankPaper.VariableArray[i] = x1 / x2;
+                                    blankPaper.BlankPlenses[i] = s1 + "/" + s2;
+                                    break;
+                            }
+
+                            index = 1;
+                        }
+                        else
+                        {
+                            float x1 = iscratchPager.VariableArray[i + index];
+                            string s1 = iscratchPager.BlankPlenses[i + index];
+                            blankPaper.VariableArray[i] = x1;
+                            blankPaper.BlankPlenses[i] = s1;
+                        }
                     }
-                    else
+                    foreach (var vTuple in MegreArray(blankPaper))
                     {
-                        ints[i] = iArray[i + index];
-                        inLog[i] = sArray[i + index].ToString();
+                        yield return vTuple;
                     }
-                }
-                foreach (var vTuple in MegreArray(inLog, ints))
-                {
-                    yield return vTuple;
                 }
             }
-
         }
 
-
-
         //取得陣列所有組合
-        public IEnumerable<int[]> GetAllArray(int[] iArray)
+        public IEnumerable<float[]> GetAllArray(float[] iArray)
         {
-            int[] iOneArray = null;
 
             if (iArray.Length == 1)
             {
-                yield return new int[] { iArray[0] };
+                yield return new float[] { iArray[0] };
                 yield break;
             }
 
 
             for (int i = 0; i < iArray.Length; i++)
             {
-                int[] nextArray = GetNextArray(iArray[i], iArray);
+                float[] nextArray = GetNextArray(iArray[i], iArray);
 
-                foreach (int[] nArray in GetAllArray(nextArray).ToArray())
+                foreach (float[] nArray in GetAllArray(nextArray).ToArray())
                 {
-                    yield return iOneArray = new int[] { iArray[i] }.Concat(nArray).ToArray();
+                    yield return new float[] { iArray[i] }.Concat(nArray).ToArray();
                 }
             }
         }
 
-
         //將傳入的陣列扣除傳入的整數
-        public int[] GetNextArray(int iTrgat, int[] iArray)
+        public float[] GetNextArray(float iTrgat, float[] iArray)
         {
-            int[] newArray = new int[iArray.Length - 1];
+            float[] newArray = new float[iArray.Length - 1];
 
             int index = 0;
             for (int i = 0; i < newArray.Length; i++)
