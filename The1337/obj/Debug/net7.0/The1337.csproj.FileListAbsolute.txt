@@ -1,0 +1,15 @@
+D:\Exercise\Csharp\The1337\The1337\bin\Debug\net7.0\The1337.exe
+D:\Exercise\Csharp\The1337\The1337\bin\Debug\net7.0\The1337.deps.json
+D:\Exercise\Csharp\The1337\The1337\bin\Debug\net7.0\The1337.runtimeconfig.json
+D:\Exercise\Csharp\The1337\The1337\bin\Debug\net7.0\The1337.dll
+D:\Exercise\Csharp\The1337\The1337\bin\Debug\net7.0\The1337.pdb
+D:\Exercise\Csharp\The1337\The1337\obj\Debug\net7.0\The1337.csproj.AssemblyReference.cache
+D:\Exercise\Csharp\The1337\The1337\obj\Debug\net7.0\The1337.GeneratedMSBuildEditorConfig.editorconfig
+D:\Exercise\Csharp\The1337\The1337\obj\Debug\net7.0\The1337.AssemblyInfoInputs.cache
+D:\Exercise\Csharp\The1337\The1337\obj\Debug\net7.0\The1337.AssemblyInfo.cs
+D:\Exercise\Csharp\The1337\The1337\obj\Debug\net7.0\The1337.csproj.CoreCompileInputs.cache
+D:\Exercise\Csharp\The1337\The1337\obj\Debug\net7.0\The1337.dll
+D:\Exercise\Csharp\The1337\The1337\obj\Debug\net7.0\refint\The1337.dll
+D:\Exercise\Csharp\The1337\The1337\obj\Debug\net7.0\The1337.pdb
+D:\Exercise\Csharp\The1337\The1337\obj\Debug\net7.0\The1337.genruntimeconfig.cache
+D:\Exercise\Csharp\The1337\The1337\obj\Debug\net7.0\ref\The1337.dll
